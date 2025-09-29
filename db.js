@@ -1,12 +1,11 @@
-//Connect to MongoDB using Mongoose
+//Connection to MongoDB file
 
-const mongoose = require('mongoose'); //commonjs Module
-require('dotenv').config(); //import and configure dotenv
+const mongoose = require('mongoose'); //Commonjs Module - Default
+require('dotenv').config();
 
-async function connectDB() {
-  await mongoose.connect(process.env.MONGODBATLAS_URI);
-  console.log("Connected to MongoDB");
-  
+async function connectDB(){
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to MongoDB");
 }
 
-module.exports = {connectDB; mongoose}
+module.exports = { connectDB, mongoose };

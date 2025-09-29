@@ -1,25 +1,26 @@
-const { connectDB, mongoose } = require('./db'); //import connectDB and mongoose from db.js
-const { user } = require('./Models/user');
-const { task } = require('./Models/task');
+const { connectDB, mongoose } = require('./db');
+const { User } = require('./Models/User');
+const { Task } = require('./Models/Task');
 
 
-ASYNC function main(){
-  await connectDB(); //connect to the database
-  await userdeleteMany({}); //delete all users
-  await task.deleteMany({}); //delete all tasks
+async function main(){
+    await connectDB();
 
-  users = await user.instertMany([
-    {name: "Alice Kriuki", email: "alice@gmai.com", role: "admin"},
-    {name: "Bob Njoroge", email: "bob@gmail.com"}
-  ])
-await task.insertMany([
-  {title: "Write Proposal", status: "to do", owner: "Alice"},  
-  {title: "Design Schema", status: "in_progress", owner: "Bob"},
-  
-])
-console.log("Database Seeded Successfully");
-await mongoose.disconnect(); //close the database connection
+    await User.deleteMany({});
+    await Task.deleteMany({});
 
-} 
+    await User.insertMany([
+        { name: "Alice Kariuki", email: "alice@gmail.com", role: "admin" },
+        { name: "Bob Wanjala", email: "bob@plp.com" }
+    ]);
+
+    await Task.insertMany([
+        { title: "Write Proposal", status: "todo", owner: "Alice" },
+        { title: "Design Schema", status: "in_progress", owner: "Bob" }
+    ]);
+
+    console.log("Data populated");
+    await mongoose.disconnect();
+}
 
 main();
